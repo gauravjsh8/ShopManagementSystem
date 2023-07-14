@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShopManagementSystem.Models;
 
 namespace ShopManagementSystem.Data
 {
@@ -9,6 +10,7 @@ namespace ShopManagementSystem.Data
         {
             
         }
+        public DbSet<Item>Items { get; set; }
     }
     
 }
