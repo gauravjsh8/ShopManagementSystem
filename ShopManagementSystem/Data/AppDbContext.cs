@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShopManagementSystem.Models;
 
 namespace ShopManagementSystem.Data
 {
@@ -9,6 +10,8 @@ namespace ShopManagementSystem.Data
         {
             
         }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ShopManagementSystem.Models.ShopInformation> ShopInformation { get; set; } = default!;
     }
     
 }
