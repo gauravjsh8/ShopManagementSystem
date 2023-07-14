@@ -10,6 +10,7 @@ namespace ShopManagementSystem.Data
         {
             
         }
+        public DbSet<Item>Items { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ShopManagementSystem.Models.ShopInformation> ShopInformation { get; set; } = default!;
     }
