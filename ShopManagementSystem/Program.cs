@@ -7,14 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IItemServices, ItemService>();
 
-//For Swagger
- builder.Services.AddEndpointsApiExplorer();
- builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 
 app.UseSwagger();
