@@ -26,7 +26,7 @@ namespace ShopManagementSystem.Services
             }
             var item = new Item()
             {
-                Id = model.Id,
+                Id = 0,
                 Discount = model.Discount,
                 Name = model.Name,
                 Price = model.Price,
@@ -139,6 +139,35 @@ namespace ShopManagementSystem.Services
 
         }
 
-       
+        public IResult<ItemDTO> Update(int id, ItemDTO model)
+        {
+            var data = _context.Items.Find(id);
+            if (data ==null || model == null)
+            {
+                return new IResult<ItemDTO>()
+                {
+                    ResultStatus = status.failure,
+                };
+            }
+            var item = new Item()
+            {
+                Id = 0,
+                Discount = model.Discount,
+                Name = model.Name,
+                Price = model.Price,
+                Stock = model.Stock
+
+            };
+
+            _context.Items.Update(item);
+            _context.SaveChanges();
+            return new IResult<ItemDTO>()
+            {
+                Data = model,
+                ResultStatus = status.success,
+                message = "Item Added Successfully"
+
+            };
+        }
     }
 }

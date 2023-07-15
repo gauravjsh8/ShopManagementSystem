@@ -2,7 +2,111 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<div>
+    <div class="Customer">
+        <div class="row" data-bind="">
+            <div class="col-4">
+                <label>Customer Name</label>
+                <input type="text" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label>Address</label>
+                <input type="text" class="form-control" " />
+            </div> <div class="col-4">
+                <label>PhoneNo:</label>
+                <input type="text" class="form-control" " />
+            </div>
+        </div>
+    </div>
+
+    <div class="item">
+        <div class="row" data-bind="with:newItem">
+            <div class="col-4">
+                <label>Item</label>
+                <input class="form-control"/>
+            </div>
+            <div class="col-4">
+                <label>Price</label>
+                <input type="text" class="form-control"/>
+            </div>
+            <div class="col-4">
+                <label>Quantity:</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label>Discount:</label>
+                <input type="text" class="form-control"  />
+            </div>
+            <div class="col-4">
+                <label>Total:</label>
+                <input type="text" class="form-control"  />
+            </div>
+            <div class="col-4">
+                <button type="submit">
+                    <span >Add</span>
+               @*   <span data-bind="visible:$parent.mode()===mode.update">Update</span>*@
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
 </div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>SN</th>
+            <th>item Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Total</th>
+            <td>Action</td>
+        <tr>
+
+    </thead>
+    <tbody data-s">
+        <tr>
+            <td data-bind="text:$index()+1"></td>
+            <td data-bind="text:name"></td>
+            <td data-bind="text:price"></td>
+            <td data-bind="text:quantity"></td>
+            <td data-bind="text:discount"></td>
+            <td data-bind="text:total"></td>
+            <td>
+                <button class="btn btn-primary" data-bind="click:$root.Update">Edit</button>
+                <button class="btn btn-danger" data-bind="click:$root.DeleteItem">Delete</button>
+
+            </td>
+        </tr>
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>Total:</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td data-bind="text:$root.grandTotal"></td>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+<button type="submit" data-bind="click:$root.test"> CheckOut </button>
+@section Scripts{
+  
+}
