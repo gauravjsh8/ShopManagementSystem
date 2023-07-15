@@ -18,7 +18,7 @@
                 <input data-bind="value:stock" class="form-control" type=text/>
             </div>
             <div class="text-center mt-2">
-                <a class="btn btn-success" type="submit" data-bind ="click:$root.test">Submit</a>
+                <a class="btn btn-success" type="submit" data-bind ="click:$root.AddItem">Submit</a>
             </div>
         </div>
     </div>
@@ -35,6 +35,8 @@
                 <th>Price</th>
                 <th>Discount</th>
                 <th>Stock</th>
+                <th>Action</th>
+
                 </tr>
             </thead>
             <tbody data-bind="foreach:allItems">
@@ -44,6 +46,13 @@
                 <td data-bind="text:price"></td>
                 <td data-bind="text:discount"></td>
                 <td data-bind="text:stock"></td>
+                <td>
+                    <div class=btn-group>
+                        <button class="btn btn-danger" data-bind="click:$root.DeleteItem">DELETE</button>
+                        <button class="btn btn-danger" data-bind="click:$root.selectItem">UPDATE</button>
+
+                    </div>
+                </td>
                 </tr>
             </tbody>
         </table>

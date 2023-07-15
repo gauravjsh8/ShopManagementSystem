@@ -8,6 +8,7 @@ namespace ShopManagementSystem.Services
         IResult<IEnumerable<ItemDTO>> GetAll();
          IResult<ItemDTO>  GetItem(int id);
          IResult<ItemDTO> Add(ItemDTO model);
+         IResult<ItemDTO> Update(int id, ItemDTO model);
          IResult<int> Remove(int id);
     }
     public class ItemDTO

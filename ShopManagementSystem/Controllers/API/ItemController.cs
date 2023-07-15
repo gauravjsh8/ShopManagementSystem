@@ -29,15 +29,13 @@ namespace ShopManagementSystem.Controllers.API
         // Get Single Item
         [HttpGet]
         [Route("{id:int}")]
-        public IResult<ItemDTO> Get(int id){
+        public IResult<ItemDTO> Get(int id) {
             return _services.GetItem(id);
-            }
-        // Get Delete Items
-        [HttpDelete]
-        [Route("{id:int}")]
-        public IResult<int> Remove(int id)
-        {
-            return _services.Remove(id);
+        }
+
+        [HttpPut("{id}")]
+        public IResult<ItemDTO> Update(int id, ItemDTO model){
+            return _services.Update(id, model);
         }
     }
 }
