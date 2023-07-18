@@ -10,6 +10,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IItemServices, ItemService>();
+builder.Services.AddScoped<IMaster, Master>();
 
 
 

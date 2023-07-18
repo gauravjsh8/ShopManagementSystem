@@ -2,11 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-
-
 
 <div>
     <div class="Customer">
@@ -24,44 +19,55 @@
             </div>
         </div>
     </div>
+<div style="position:relative">
+    <br />
+    <input data-bind="value: SearchedString, valueUpdate: 'afterkeydown', event: { keyup: performSearch }" placeholder="Search" />
+    <br />
+    <ol data-bind="foreach:SearchDropDown" style="position:absolute;top:60px;background:white;width:18%">
+        <li data-bind="text:name, click:$root.Testing"></li>
+    </ol>
+</div>
+<div data-bind="with:newItemVm">
+    <input  data-bind="value:price"/>
 
+</div>
+<div data-bind="with:newItemVm">
+    <input data-bind="value:price"/>
     <div class="item">
-        <div class="row" data-bind="with:newItem">
+        <div class="row">
             <div class="col-4">
                 <label>Item</label>
-                <input class="form-control"/>
+                <input class="form-control" data-bind="value:name" />
             </div>
             <div class="col-4">
                 <label>Price</label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" data-bind="value:price"/>
             </div>
             <div class="col-4">
                 <label>Quantity:</label>
-                <input type="text" class="form-control" />
+                <input type="text" class="form-control" data-bind="value:quantity" />
             </div>
         </div>
         <div class="row">
             <div class="col-4">
                 <label>Discount:</label>
-                <input type="text" class="form-control"  />
+                <input type="text" class="form-control" data-bind="value:discount"  />
             </div>
             <div class="col-4">
                 <label>Total:</label>
-                <input type="text" class="form-control"  />
+                <input type="text" class="form-control" data-bind="value:total" />
             </div>
             <div class="col-4">
                 <button type="submit">
-                    <span >Add</span>
-               @*   <span data-bind="visible:$parent.mode()===mode.update">Update</span>*@
+                    <span data-bind="click:$root.ItemAddToCheckOut">Add</span>
                 </button>
             </div>
         </div>
     </div>
-
-
-
-
 </div>
+
+
+
 
 <table class="table table-striped">
     <thead>
@@ -76,7 +82,7 @@
         <tr>
 
     </thead>
-    <tbody data-s">
+    <tbody data-bind="foreach:CheckoutItemArray">
         <tr>
             <td data-bind="text:$index()+1"></td>
             <td data-bind="text:name"></td>
@@ -99,14 +105,18 @@
             <td></td>
             <td></td>
             <td></td>
-            <td data-bind="text:$root.grandTotal"></td>
+                <td data-bind="text:$root.grandTotal"></td>
         </tr>
     </tfoot>
 </table>
 
 
-
-<button type="submit" data-bind="click:$root.test"> CheckOut </button>
 @section Scripts{
-  
+    <script src="~/js/knockout.js"></script>
+    <script src="~/js/app/item.model.js"></script>
+    <script src="~/js/app/item.controller.js"></script>
+    <script>
+        var objitem = new itemController();
+        ko.applyBindings(objitem);
+    </script>
 }

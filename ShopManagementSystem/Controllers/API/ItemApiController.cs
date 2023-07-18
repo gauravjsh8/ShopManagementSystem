@@ -7,10 +7,10 @@ namespace ShopManagementSystem.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ItemController : ControllerBase
+    public class ItemApiController : ControllerBase
     {
         public readonly IItemServices _services;
-        public ItemController(IItemServices services)
+        public ItemApiController(IItemServices services)
         {
             _services = services;
         }
@@ -26,6 +26,21 @@ namespace ShopManagementSystem.Controllers.API
         {
             return _services.GetAll();
         }
+
+
+        //search
+        [HttpGet("Search")]
+        public   IResult<IEnumerable<ItemDTO>> Search(string search)
+        {
+            return _services.Search(search);
+        }
+
+        [HttpDelete("{id}")]
+      public  IResult<int> Delete(int id)
+        {
+            return _services.Remove(id);
+        }
+
         // Get Single Item
         [HttpGet]
         [Route("{id:int}")]
@@ -33,9 +48,9 @@ namespace ShopManagementSystem.Controllers.API
             return _services.GetItem(id);
         }
 
-        [HttpPut("{id}")]
-        public IResult<ItemDTO> Update(int id, ItemDTO model){
-            return _services.Update(id, model);
+        [HttpPut]
+        public IResult<ItemDTO> Update( ItemDTO model){
+            return _services.Update( model);
         }
     }
 }

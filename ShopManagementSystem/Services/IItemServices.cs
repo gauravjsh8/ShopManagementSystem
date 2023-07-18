@@ -1,15 +1,17 @@
 ﻿using ShopManagementSystem.Common;
 using ShopManagementSystem.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShopManagementSystem.Services
 {
     public interface IItemServices
     {
         IResult<IEnumerable<ItemDTO>> GetAll();
-         IResult<ItemDTO>  GetItem(int id);
-         IResult<ItemDTO> Add(ItemDTO model);
-         IResult<ItemDTO> Update(int id, ItemDTO model);
-         IResult<int> Remove(int id);
+        IResult<ItemDTO> GetItem(int id);
+        IResult<ItemDTO> Add(ItemDTO model);
+        IResult<ItemDTO> Update(ItemDTO model);
+        IResult<int> Remove(int id);
+        IResult<IEnumerable<ItemDTO>> Search(string search);
     }
     public class ItemDTO
     {
@@ -19,4 +21,8 @@ namespace ShopManagementSystem.Services
         public int Discount { get; set; }
         public int Stock { get; set; }
     }
+  
+
+
+
 }

@@ -1,4 +1,5 @@
-﻿/// <reference path="../../knockout3.5.1.js" />
+﻿/// <reference path="../../knockout.js" />
+
 
 function CustomerModel(item) {
     var self = this;

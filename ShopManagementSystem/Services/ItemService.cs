@@ -139,27 +139,92 @@ namespace ShopManagementSystem.Services
 
         }
 
-        public IResult<ItemDTO> Update(int id, ItemDTO model)
+
+        /// <summary>
+        ///  Search item
+        /// </summary>
+        public IResult<IEnumerable<ItemDTO>> Search(string? search)
+
         {
-            var data = _context.Items.Find(id);
-            if (data ==null || model == null)
+            if(search == null)
             {
-                return new IResult<ItemDTO>()
-                {
-                    ResultStatus = status.failure,
+                return new IResult<IEnumerable<ItemDTO>>()
+                {   Data = null,
+                    message = "Search value is null",
+                    ResultStatus = status.failure
                 };
             }
-            var item = new Item()
+            else if(search =="")
             {
-                Id = 0,
-                Discount = model.Discount,
-                Name = model.Name,
-                Price = model.Price,
-                Stock = model.Stock
+                return new IResult<IEnumerable<ItemDTO>>()
+                {
+                    Data=null,
+                    message = "Please enter search term",
+                };
+            }
+          var  data= _context.Items.ToList().Where(x => x.Name.StartsWith(search, StringComparison.OrdinalIgnoreCase));
+            var dataDto = (from d in data
+                           select new ItemDTO()
+                           {  Id =d.Id,
+                               Name = d.Name,
+                               Discount =d.Discount,
+                               Price =d.Price,
+                               Stock =d.Stock
+                           }).Take(4)
+                           .ToList();
 
-            };
+            if (dataDto.Count()>0)
+            {
+                return new IResult<IEnumerable<ItemDTO>>()
+                {
+                    Data = dataDto,
+                    message = "Searched Result",
+                    ResultStatus = status.success
+                };
+            }
+            else
+            {
 
-            _context.Items.Update(item);
+                return new IResult<IEnumerable<ItemDTO>>()
+                {
+                    message = "No data Matched",
+                    ResultStatus = status.failure
+                };
+            }
+        }
+
+        /// <summary>
+        ///   Update
+        /// </summary>
+
+
+        public IResult<ItemDTO> Update( ItemDTO model)
+        {
+            var data = _context.Items.Find(model.Id);
+                if (data == null || model == null)
+                {
+                    return new IResult<ItemDTO>()
+                    {
+                        ResultStatus = status.failure,
+                    };
+                }
+            //var item = new Item()
+            //{
+            //    Id = model.Id,
+            //    Discount = model.Discount,
+            //    Name = model.Name,
+            //    Price = model.Price,
+            //    Stock = model.Stock
+
+            //};
+            //data.Id = item.Id;
+            data.Discount = model.Discount;
+            data.Name = model.Name;
+            data.Price = model.Price;
+            data.Stock = model.Stock;
+
+
+            _context.Items.Update(data);
             _context.SaveChanges();
             return new IResult<ItemDTO>()
             {

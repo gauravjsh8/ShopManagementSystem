@@ -4,7 +4,7 @@ namespace ShopManagementSystem.Controllers
 {
     public class ItemsController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Item()
         {
             return View();
         }
